@@ -30,16 +30,8 @@
     <DelphiCompile Include="OrdenCarga.dpr">
       <MainSource>MainSource</MainSource>
     </DelphiCompile>
-    <DCCReference Include="..\..\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo Gi\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo Gi\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo G\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo G\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo \Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo \Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
-    <DCCReference Include="..\..\GComer Desarrollo\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
+    <DCCReference Include="....\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
+    <DCCReference Include="...\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
     <DCCReference Include="..\Comun\dmImportarOrdenes.pas">
       <DesignClass>TDataModule</DesignClass>
       <Form>FDMImportarOrdenes</Form>
@@ -47,6 +39,7 @@
     <DCCReference Include="..\Comun\UTipos.pas">
       <Form>$R *.res</Form>
     </DCCReference>
+    <DCCReference Include="..\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
     <DCCReference Include="AdvertenciaFD.pas">
       <Form>FDAdvertencia</Form>
     </DCCReference>
@@ -57,6 +50,16 @@
     <DCCReference Include="C:\Comun\UTipos.pas">
       <Form>$R *.res</Form>
     </DCCReference>
+    <DCCReference Include="C:\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
+    <DCCReference Include="C:\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
+    <DCCReference Include="C:\GComer Desarrollo Gi\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
+    <DCCReference Include="C:\GComer Desarrollo Gi\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
+    <DCCReference Include="C:\GComer Desarrollo G\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
+    <DCCReference Include="C:\GComer Desarrollo G\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
+    <DCCReference Include="C:\GComer Desarrollo \Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
+    <DCCReference Include="C:\GComer Desarrollo \Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
+    <DCCReference Include="C:\GComer Desarrollo\Comun\SincronizacionWeb\ConexionAWSAurora.pas" />
+    <DCCReference Include="C:\GComer Desarrollo\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas" />
     <DCCReference Include="CGlobal.pas" />
     <DCCReference Include="Comun\dmImportarOrdenes.pas">
       <Form>FDMImportarOrdenes</Form>

@@ -22,8 +22,8 @@ uses
   AdvertenciaFD in 'AdvertenciaFD.pas' {FDAdvertencia},
   CGlobal in 'CGlobal.pas',
   dmImportarOrdenes in 'Comun\dmImportarOrdenes.pas' {FDMImportarOrdenes: TDataModule},
-  ConexionAWSAurora in '..\..\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAurora.pas',
-  ConexionAWSAuroraConstantes in '..\..\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas',
+  ConexionAWSAurora in '..\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAurora.pas',
+  ConexionAWSAuroraConstantes in '..\GComer Desarrollo Git\Comun\SincronizacionWeb\ConexionAWSAuroraConstantes.pas',
   UFImportarOrdenes in 'Comun\UFImportarOrdenes.pas' {FImportarOrdenes},
   UTipos in 'Comun\UTipos.pas';
 
