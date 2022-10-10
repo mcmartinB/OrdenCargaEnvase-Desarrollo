@@ -2182,15 +2182,12 @@ begin
         nota_occ.Lines.Add(UpperCase('La mercancía transportada realiza tráfico marítimo entre islas'));
       end;
       nota_occ.Lines.Add('- EL CONDUCTOR CONFIRMA QUE LA MERCANCÍA VA SUJETA POR BARRAS.');
-<<<<<<< HEAD
 
       if (empresa_occ.Text = 'F17') and (mes >= 5) and (mes <= 9) then
         nota_occ.Lines.Add('TEMPERATURA ÓPTIMA 11 GRADOS')
       else
         nota_occ.Lines.Add('TEMPERATURA ÓPTIMA 12 GRADOS');
 
-=======
->>>>>>> 34d5044e7e508a0b2f73a7dcb09214c93da10b3b
       nota_occ.Lines.Add('- TEMPERATURA DE LA CARGA: CONFORME.');
     end;
 end;
