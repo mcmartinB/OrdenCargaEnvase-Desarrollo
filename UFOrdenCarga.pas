@@ -2074,7 +2074,10 @@ begin
 end;
 
 procedure TFOrdenCarga.Observaciones;
+var
+  anyo, mes, dia : Word;
 begin
+    decodedate(strtodate(fecha_occ.Text), anyo, mes, dia);
     if ( Trim(nota_occ.Text) = '' )  then
     begin
       if (( empresa_occ.Text = 'F18' )  or (empresa_occ.Text = '050')) then
@@ -2155,8 +2158,14 @@ begin
         nota_occ.Lines.Add(UpperCase('La mercancía transportada realiza tráfico marítimo entre islas'));
       end;
       nota_occ.Lines.Add('- EL CONDUCTOR CONFIRMA QUE LA MERCANCÍA VA SUJETA POR BARRAS.');
+
+      if (empresa_occ.Text = 'F17') and (mes >= 5) and (mes <= 9) then
+        nota_occ.Lines.Add('TEMPERATURA ÓPTIMA 11 GRADOS')
+      else
+        nota_occ.Lines.Add('TEMPERATURA ÓPTIMA 12 GRADOS');
+
+      nota_occ.Lines.Add('- TEMPERATURA DE LA CARGA: CONFORME.');
     end;
-    nota_occ.Lines.Add('- TEMPERATURA DE LA CARGA: CONFORME.');
 end;
 
 procedure TFOrdenCarga.dir_sum_occChange(Sender: TObject);
