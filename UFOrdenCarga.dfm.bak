@@ -617,7 +617,6 @@ object FOrdenCarga: TFOrdenCarga
       ColorEdit = clMoneyGreen
       MaxLength = 5
       TabOrder = 2
-      OnExit = hora_occExit
       DataField = 'hora_occ'
       DataSource = DSMaestro
     end
@@ -2386,19 +2385,6 @@ object FOrdenCarga: TFOrdenCarga
           ParentColor = False
           Layout = tlCenter
         end
-        object Label8: TLabel
-          Left = 319
-          Top = 3
-          Width = 439
-          Height = 19
-          AutoSize = False
-          Caption = 
-            'Grabar Peso Real en Transito ( Independientemente del Peso del A' +
-            'rticulo (Fijo o Variable) )'
-          Color = cl3DLight
-          ParentColor = False
-          Layout = tlCenter
-        end
         object STProducto_ocl: TStaticText
           Left = 144
           Top = 16
@@ -2420,7 +2406,6 @@ object FOrdenCarga: TFOrdenCarga
           MaxLength = 3
           TabOrder = 0
           OnChange = producto_oclChange
-          OnExit = producto_oclExit
           DataField = 'producto_ocl'
           DataSource = DSDetalle
           PrimaryKey = True
@@ -2808,19 +2793,6 @@ object FOrdenCarga: TFOrdenCarga
           AntesEjecutar = ssEnvaseAntesEjecutar
           Concatenar = False
         end
-        object es_peso_real_ocl: TDBCheckBox
-          Left = 301
-          Top = 5
-          Width = 17
-          Height = 17
-          DataField = 'es_peso_real_ocl'
-          DataSource = DSDetalle
-          TabOrder = 29
-          ValueChecked = '1'
-          ValueUnchecked = '0'
-          OnEnter = porte_bonny_occEnter
-          OnExit = porte_bonny_occExit
-        end
       end
     end
   end
@@ -3025,9 +2997,7 @@ object FOrdenCarga: TFOrdenCarga
     end
   end
   object QOrdenCargaL: TQuery
-    BeforeInsert = QOrdenCargaLBeforeInsert
     AfterInsert = QOrdenCargaLAfterInsert
-    BeforeEdit = QOrdenCargaLBeforeEdit
     AfterEdit = QOrdenCargaLAfterEdit
     BeforePost = QOrdenCargaLBeforePost
     AfterPost = QOrdenCargaLAfterPost
@@ -3206,14 +3176,6 @@ object FOrdenCarga: TFOrdenCarga
     object strngfldQOrdenCargaLnotas_ocl: TStringField
       FieldName = 'notas_ocl'
       Size = 90
-    end
-    object QOrdenCargaLes_peso_real_ocl: TIntegerField
-      FieldName = 'es_peso_real_ocl'
-      Origin = 'DATABASE.frf_orden_carga_l.es_peso_real_ocl'
-    end
-    object QOrdenCargaLkilos_reales_ocl: TFloatField
-      FieldName = 'kilos_reales_ocl'
-      Origin = 'DATABASE.frf_orden_carga_l.kilos_reales_ocl'
     end
   end
   object ImageList: TImageList
@@ -4139,10 +4101,5 @@ object FOrdenCarga: TFOrdenCarga
       ShortCut = 27
       OnExecute = BCancelarExecute
     end
-  end
-  object qryPesoReal: TQuery
-    DatabaseName = 'Database'
-    Left = 768
-    Top = 128
   end
 end

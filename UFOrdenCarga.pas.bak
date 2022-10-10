@@ -2098,10 +2098,7 @@ begin
 end;
 
 procedure TFOrdenCarga.Observaciones;
-var
-  anyo, mes, dia : Word;
 begin
-    decodedate(strtodate(fecha_occ.Text), anyo, mes, dia);
     if ( Trim(nota_occ.Text) = '' )  then
     begin
       if (( empresa_occ.Text = 'F18' )  or (empresa_occ.Text = '050')) then
@@ -2182,17 +2179,8 @@ begin
         nota_occ.Lines.Add(UpperCase('La mercancía transportada realiza tráfico marítimo entre islas'));
       end;
       nota_occ.Lines.Add('- EL CONDUCTOR CONFIRMA QUE LA MERCANCÍA VA SUJETA POR BARRAS.');
-<<<<<<< HEAD
-
-      if (empresa_occ.Text = 'F17') and (mes >= 5) and (mes <= 9) then
-        nota_occ.Lines.Add('TEMPERATURA ÓPTIMA 11 GRADOS')
-      else
-        nota_occ.Lines.Add('TEMPERATURA ÓPTIMA 12 GRADOS');
-
-=======
->>>>>>> 34d5044e7e508a0b2f73a7dcb09214c93da10b3b
-      nota_occ.Lines.Add('- TEMPERATURA DE LA CARGA: CONFORME.');
     end;
+    nota_occ.Lines.Add('- TEMPERATURA DE LA CARGA: CONFORME.');
 end;
 
 procedure TFOrdenCarga.dir_sum_occChange(Sender: TObject);
@@ -2220,92 +2208,12 @@ begin
 end;
 
 procedure TFOrdenCarga.producto_oclChange(Sender: TObject);
-var bEsPesoReal: boolean;
 begin
   STProducto_ocl.Caption:= DDescripciones.desProductoVenta( producto_ocl.Text );
   STCategoria_ocl.Caption:= DDescripciones.desCategoria( empresa_occ.Text, producto_ocl.Text, categoria_ocl.Text );
   STColor_ocl.Caption:= DDescripciones.desColor( empresa_occ.Text, producto_ocl.Text, color_ocl.Text );
   if envase_ocl.Text <> '' then
     envase_oclChange( envase_ocl );
-  if producto_ocl.Text <> '' then
-  begin
-    bEsPesoReal := EsPesoReal (  empresa_occ.Text, centro_salida_occ.Text, producto_ocl.Text );
-    es_peso_real_ocl.Enabled := bEsPesoReal;
-    es_peso_real_ocl.checked := bEsPesoReal;
-    Label8.Enabled := bEsPesoReal;
-    if ( QOrdenCargaL.State = dsInsert ) then
-    begin
-    if es_peso_real_ocl.Checked then
-      QOrdenCargaL.FieldByName('es_peso_real_ocl').AsInteger:= 1
-    else
-      QOrdenCargaL.FieldByName('es_peso_real_ocl').AsInteger:= 0;
-    end;
-  end;  
-end;
-
-procedure TFOrdenCarga.producto_oclExit(Sender: TObject);
-var
-  AFecha : TDateTime;
-begin
-  with DOrdenCarga.QCambiarComercial do
-  begin
-    comercial_ocl.Text := '';
-    AFecha := StrToDate(fecha_occ.Text);
-
-    if Active then
-    begin
-      Cancel;
-      Close;
-    end;
-    SQL.Clear;
-    SQL.Add(' select cod_comercial_cc from frf_clientes_comercial ');
-    SQL.Add(' where cod_cliente_cc = :cliente ');
-    SQL.Add(' and cod_producto_cc = :producto ');
-//    SQL.Add(' and :fecha between fecha_ini_cc and nvl(fecha_fin_cc, ' + QuotedStr(datetostr(AFecha)) + ')');
-//    ParamByName('fecha').asDateTime := AFecha;
-    ParamByName('cliente').asString := cliente_sal_occ.Text;
-    ParamByName('producto').asString := producto_ocl.Text;
-    Open;
-    if isEmpty then
-    begin
-      if Active then
-      begin
-        Cancel;
-        Close;
-      end;
-      SQL.Clear;
-      SQL.Add(' select cod_comercial_cc from frf_clientes_comercial ');
-      SQL.Add(' where cod_producto_cc = :producto');
-      SQL.Add('   and cod_cliente_cc is null     ');
-//      SQL.Add(' and :fecha between fecha_ini_cc and nvl(fecha_fin_cc, ' + QuotedStr(datetostr(AFecha)) + ')');
-//      ParamByName('fecha').asDateTime := AFecha;
-      ParamByName('producto').asString := producto_ocl.Text;
-      Open;
-    end;
-      if isEmpty then
-      begin
-        if Active then
-        begin
-          Cancel;
-          Close;
-        end;
-        SQL.Clear;
-        SQL.Add(' select cod_comercial_cc from frf_clientes_comercial ');
-        SQL.Add(' where cod_cliente_cc = :cliente');
-        SQL.Add('   and cod_producto_cc is null  ');
-//        SQL.Add(' and :fecha between fecha_ini_cc and nvl(fecha_fin_cc, ' + QuotedStr(datetostr(AFecha)) + ')');
-//        ParamByName('fecha').asDateTime := AFecha;
-        ParamByName('cliente').asString := cliente_sal_occ.Text;
-        Open;
-      end;
-
-      if isEmpty then
-         comercial_ocl.Text := '000'
-      else
-        comercial_ocl.Text := FieldByName('cod_comercial_cc').AsString;
-
-      Close;
-  end;
 end;
 
 function desUnidad( const ATipoUnidad: String ): String;
@@ -2383,38 +2291,6 @@ begin
   if EsNumerico(envase_ocl.Text) and (Length(envase_ocl.Text) <= 5) then
     if (envase_ocl.Text <> '' ) and (Length(envase_ocl.Text) < 9) then
       envase_ocl.Text := 'COM-' + Rellena( envase_ocl.Text, 5, '0');
-end;
-
-function TFOrdenCarga.EsPesoReal(const AEmpresa, ACentro,
-  AProducto: string): Boolean;
-begin
-  //Solo se Activa el peso real para Transitos
-  if cliente_sal_occ.Text <> '' then
-    result := false
-  else
-  begin
-    with qryPesoReal do
-    begin
-      SQL.Clear;
-      SQL.Add(' select * from frf_transito_peso_real ');
-      SQL.Add('  where empresa_tp = :empresa ');
-      SQL.Add('    and centro_tp = :centro ');
-      SQL.Add('    and producto_tp = :producto ');
-      ParamByName('empresa').AsString:= AEmpresa;
-      ParamByName('centro').AsString:= ACentro;
-      ParamByName('producto').AsString:= AProducto;
-      Open;
-      try
-        if not IsEmpty then
-          result := true
-        else
-          result := false;
-
-      finally
-        Close;
-      end;
-    end;
-  end;
 end;
 
 procedure TFOrdenCarga.marca_oclChange(Sender: TObject);
@@ -2771,19 +2647,6 @@ begin
       DOrdenCarga.CambiarImpuestoDetalle( StrToInt( orden_occ.Text ), rImpuestosAux );
     end;
   end;
-end;
-
-procedure TFOrdenCarga.QOrdenCargaLBeforeEdit(DataSet: TDataSet);
-begin
-  es_peso_real_ocl.enabled := EsPesoReal (  empresa_occ.Text, centro_salida_occ.Text, producto_ocl.Text );
-  Label8.enabled := EsPesoReal (  empresa_occ.Text, centro_salida_occ.Text, producto_ocl.Text );
-end;
-
-procedure TFOrdenCarga.QOrdenCargaLBeforeInsert(DataSet: TDataSet);
-begin
-  es_peso_real_ocl.Enabled := false;
-  es_peso_real_ocl.Checked := false;
-  Label8.Enabled := false;
 end;
 
 procedure TFOrdenCarga.QOrdenCargaLBeforePost(DataSet: TDataSet);
